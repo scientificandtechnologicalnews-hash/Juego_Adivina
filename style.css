@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #e6e6e6;
+  margin: 0;
+  padding: 0;
+}
+
+.game-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.configuracion {
+  margin-bottom: 20px;
+}
+
+#btnStart {
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.dado {
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+h1 {
+  color: red;
+  background-color: white;
+}
