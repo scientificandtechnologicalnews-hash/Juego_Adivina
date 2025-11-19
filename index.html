@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- Hacemos que la web se vea bien en móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Juego de Memoria - 10 Dados</title>
+
+    <!-- Vinculamos el CSS externo -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="game-container">
+      <!-- TÍTULO DEL JUEGO -->
+      <h1>Juego de Memoria - 10 Dados</h1>
+
+      <!-- PANEL PARA ELEGIR EL TIEMPO -->
+      <div class="configuracion">
+        <label for="tiempo">Selecciona el tiempo:</label>
+        <select id="tiempo">
+          <!-- El usuario elige cuánto tiempo ve los dados -->
+          <option value="10">10 segundos</option>
+          <option value="20">20 segundos</option>
+          <option value="30">30 segundos</option>
+          <option value="40">40 segundos</option>
+        </select>
+
+        <!-- Botón para comenzar la partida -->
+        <button id="btnStart">Iniciar Partida</button>
+      </div>
+
+      <!-- TABLERO DONDE APARECERÁN LOS DADOS -->
+      <div id="tablero" class="tablero">
+        <!-- Aquí pondremos dinámicamente los 10 dados con JavaScript -->
+      </div>
+
+      <!-- CAPA CORTINA QUE TAPARÁ LOS DADOS CUANDO PASE EL TIEMPO -->
+      <div id="cortina" class="cortina oculto">
+        <!-- Este mensaje aparecerá cuando se oculten los dados -->
+        <h2>¿Qué recuerdas?</h2>
+      </div>
+    </div>
+
+    <!-- Cargamos el JavaScript externo -->
+    <script src="script.js"></script>
+  </body>
+</html>
