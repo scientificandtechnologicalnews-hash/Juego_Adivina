@@ -1,10 +1,94 @@
-# editorconfig.org
+/* ---------------------------------------------------------
+   VARIABLES PRINCIPALES DEL JUEGO
+--------------------------------------------------------- */
 
-root = true
+// Referencias a los elementos del DOM
+const tablero = document.getElementById("tablero");
+const btnStart = document.getElementById("btnStart");
+const selectTiempo = document.getElementById("tiempo");
+const cortina = document.getElementById("cortina");
 
-[*]
-charset = utf-8
-indent_size = 2
-indent_style = space
-insert_final_newline = true
-trim_trailing_whitespace = true
+// Número de dados para el juego
+const NUM_DADOS = 10;
+
+// Lista de posibles caras del dado
+// Cada cara es un objeto con su icono y tipo
+const caras = [
+  { icon: "🎵", tipo: "Nota musical" },
+  { icon: "🎨", tipo: "Color" },
+  { icon: "🔤", tipo: "Letra" },
+  { icon: "🔣", tipo: "Símbolo" },
+  { icon: "🔢", tipo: "Número primo" },
+  { icon: "🐾", tipo: "Animal" }
+];
+
+/* ---------------------------------------------------------
+   FUNCIÓN PARA SORTEAR CARA ALEATORIA
+--------------------------------------------------------- */
+
+function caraAleatoria() {
+  const indice = Math.floor(Math.random() * caras.length);
+  return caras[indice];
+}
+
+/* ---------------------------------------------------------
+   FUNCIÓN QUE GENERA LOS 10 DADOS EN EL TABLERO
+--------------------------------------------------------- */
+
+function generarDados() {
+
+  // 1. Primero limpiamos el tablero por si ya había dados
+  tablero.innerHTML = "";
+
+  // 2. Generamos los 10 dados
+  for (let i = 0; i < NUM_DADOS; i++) {
+
+    // Creamos un div para el dado
+    const divDado = document.createElement("div");
+    divDado.classList.add("dado");
+
+    // Sacamos una cara aleatoria
+    const cara = caraAleatoria();
+
+    // Almacenamos el tipo en un atributo para luego poder comprobar
+    divDado.setAttribute("data-tipo", cara.tipo);
+
+    // Mostramos el icono en el dado
+    divDado.textContent = cara.icon;
+
+    // Lo añadimos al tablero
+    tablero.appendChild(divDado);
+  }
+}
+
+/* ---------------------------------------------------------
+   FUNCIÓN QUE INICIA LA PARTIDA
+--------------------------------------------------------- */
+
+function iniciarPartida() {
+
+  // 1. Generamos los dados
+  generarDados();
+
+  // 2. Mostramos los dados (quitamos la cortina si estaba puesta)
+  cortina.classList.add("oculto");
+
+  // 3. Cogemos el tiempo seleccionado por el usuario
+  const tiempo = parseInt(selectTiempo.value) * 1000;
+
+  // 4. Pasado el tiempo, tapamos los dados
+  setTimeout(() => {
+    cortina.classList.remove("oculto");
+
+    // Aquí luego podremos pedir al usuario que responda
+    console.log("Tiempo terminado. ¡Recordar!");
+
+  }, tiempo);
+}
+
+/* ---------------------------------------------------------
+   EVENTO AL PULSAR EL BOTÓN
+--------------------------------------------------------- */
+
+btnStart.addEventListener("click", iniciarPartida);
+
