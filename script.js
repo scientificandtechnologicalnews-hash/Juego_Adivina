@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectTiempo = document.getElementById("tiempo");
   const cortina = document.getElementById("cortina");
   const formulario = document.getElementById("formulario");
+  console.log("Formulario encontrado:", formulario);
 
   const NUM_DADOS = 10;
   const caras = ["🎵", "🎨", "🔤", "🔣", "🔢", "🐾"];
