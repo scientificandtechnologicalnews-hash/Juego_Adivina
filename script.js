@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnStart = document.getElementById("btnStart");
   const selectTiempo = document.getElementById("tiempo");
   const cortina = document.getElementById("cortina");
+  console.log("¿Cortina encontrada?:", cortina);
 
   const NUM_DADOS = 10;
   const caras = ["🎵", "🎨", "🔤", "🔣", "🔢", "🐾"];
