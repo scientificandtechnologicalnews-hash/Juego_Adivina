@@ -5,6 +5,7 @@ body {
   background: #e6e6e6;
   margin: 0;
   padding: 0;
+  padding-top: env(safe-area-inset-top);
 }
 
 .game-container {
