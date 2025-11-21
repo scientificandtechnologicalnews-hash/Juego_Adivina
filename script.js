@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formulario = document.getElementById("formulario");
   const btnCorregir = document.getElementById("btnCorregir");
   const resultadoDiv = document.getElementById("resultado");
+  const btnReiniciar = document.getElementById("btnReiniciar");
 
   const NUM_DADOS = 10;
   const caras = ["🎵", "🎨", "🔤", "🔣", "🔢", "🐾"];
@@ -95,3 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
   btnStart.addEventListener("click", iniciarPartida);
   btnCorregir.addEventListener("click", corregirRespuestas);
 });
+
+//Reiniciar partida
+function reiniciarPartida() {
+  console.log("Reiniciando partida...");
+  iniciarPartida(); // reutiliza la función existente
+}
+btnReiniciar.addEventListener("click", reiniciarPartida);
