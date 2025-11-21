@@ -64,10 +64,20 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Mostrar resultado
-    resultadoDiv.classList.remove("oculto");
-    resultadoDiv.innerHTML = `<strong>Puntos obtenidos: ${puntos} / 6</strong><br>${mensajes}`;
-  }
+// Mostrar resultado
+resultadoDiv.classList.remove("oculto");
+resultadoDiv.innerHTML = `<strong>Puntos obtenidos: ${puntos} / 6</strong><br>${mensajes}`;
+
+// Mostrar botón de reiniciar
+const btnReiniciar = document.getElementById("btnReiniciar");
+btnReiniciar.classList.remove("oculto");
+
+// Listener del botón
+btnReiniciar.onclick = () => {
+  iniciarPartida();           // reinicia el juego
+  btnReiniciar.classList.add("oculto"); // oculta el botón otra vez
+};
+
 
   // ====================================
   // INICIAR PARTIDA
@@ -95,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ====================================
   btnStart.addEventListener("click", iniciarPartida);
   btnCorregir.addEventListener("click", corregirRespuestas);
-});
+};
 
 //Reiniciar partida
 function reiniciarPartida() {
