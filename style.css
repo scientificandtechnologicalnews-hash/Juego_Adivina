@@ -51,7 +51,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 30px;
-  transition: opacity 0.5s ease; /* para efecto de desaparecer suavemente */
+  transition: opacity 0.5s ease;
 }
 
 /* ────────────────────────────────────
@@ -63,7 +63,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.95); /* casi negro, muy opaco */
+  background: rgba(0, 0, 0, 0.95); /* casi negro */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,14 +71,11 @@ body {
   font-size: 28px;
   font-weight: bold;
   z-index: 10; /* encima de los dados */
-  opacity: 0;
-  pointer-events: none; /* permite que no bloquee hasta que se active */
-  transition: opacity 0.8s ease; /* animación suave */
+  transition: opacity 0.5s ease;
 }
 
-.cortina.visible {
-  opacity: 1;
-  pointer-events: all; /* ahora bloquea los dados */
+.cortina.oculto {
+  display: none !important; /* ocultamos hasta que JS lo active */
 }
 
 /* ────────────────────────────────────
@@ -119,7 +116,7 @@ body {
 ──────────────────────────────────── */
 #resultado {
   margin-top: 15px;
-  display: none; /* se muestra al corregir */
+  display: none;
   text-align: left;
 }
 

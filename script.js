@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Listener del botón reiniciar
     btnReiniciar.onclick = () => {
       iniciarPartida();
-      btnReiniciar.classList.add("oculto");
+      btnReiniciar.classList.add("oculto"); // ocultar hasta la próxima partida
     };
   }
 
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tiempo = parseInt(selectTiempo.value) * 1000;
 
-    // Mostrar cortina y formulario cuando se acabe el tiempo
+    // Mostrar cortina y formulario al finalizar el tiempo
     setTimeout(() => {
       cortina.classList.remove("oculto");
       formulario.classList.remove("oculto");
