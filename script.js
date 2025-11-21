@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const dado = document.createElement("div");
       dado.classList.add("dado");
 
+      // Elegimos una cara aleatoria
       const cara = caras[Math.floor(Math.random() * caras.length)];
       dado.textContent = cara;
 
@@ -46,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let puntos = 0;
     let mensajes = "";
 
+    // Leer valores del formulario
     const respuestas = {
       "🎵": parseInt(document.getElementById("respuesta-notas").value) || 0,
       "🎨": parseInt(document.getElementById("respuesta-colores").value) || 0,
@@ -68,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resultadoDiv.classList.remove("oculto");
     resultadoDiv.innerHTML = `<strong>Puntos obtenidos: ${puntos} / 6</strong><br>${mensajes}`;
 
-    // Crear botón de reiniciar dentro del resultado si no existe
+    // Crear botón de reiniciar si no existe
     let btnReiniciar = document.getElementById("btnReiniciar");
     if (!btnReiniciar) {
       btnReiniciar = document.createElement("button");
@@ -80,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     btnReiniciar.classList.remove("oculto");
 
-    // Listener del botón reiniciar
+    // Reiniciar partida al hacer click
     btnReiniciar.onclick = () => {
       iniciarPartida();
       btnReiniciar.classList.add("oculto"); // ocultar hasta la próxima partida
@@ -93,14 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function iniciarPartida() {
     generarDados();
 
-    // Ocultar cortina, formulario y resultado al iniciar
+    // Ocultar cortina, formulario y resultado
     cortina.classList.add("oculto");
     formulario.classList.add("oculto");
     resultadoDiv.classList.add("oculto");
 
     const tiempo = parseInt(selectTiempo.value) * 1000;
 
-    // Mostrar cortina y formulario al finalizar el tiempo
+    // Mostrar cortina y formulario después del tiempo
     setTimeout(() => {
       cortina.classList.remove("oculto");
       formulario.classList.remove("oculto");

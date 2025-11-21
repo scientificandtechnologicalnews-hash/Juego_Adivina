@@ -23,7 +23,7 @@ body {
   margin-bottom: 20px;
 }
 
-#btnStart {
+.configuracion button {
   padding: 10px 20px;
   margin-left: 10px;
   cursor: pointer;
@@ -58,12 +58,12 @@ body {
    CORTINA NEGRA
 ──────────────────────────────────── */
 .cortina {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.95); /* casi negro */
+  background: rgba(0, 0, 0, 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,11 +71,10 @@ body {
   font-size: 28px;
   font-weight: bold;
   z-index: 10; /* encima de los dados */
-  transition: opacity 0.5s ease;
 }
 
 .cortina.oculto {
-  display: none !important; /* ocultamos hasta que JS lo active */
+  display: none !important; /* oculto hasta que JS lo active */
 }
 
 /* ────────────────────────────────────
@@ -116,7 +115,6 @@ body {
 ──────────────────────────────────── */
 #resultado {
   margin-top: 15px;
-  display: none;
   text-align: left;
 }
 
@@ -128,5 +126,5 @@ body {
    CLASES OCULTAS
 ──────────────────────────────────── */
 .oculto {
-  display: none !important; /* aseguramos que no se vea hasta que JS lo permita */
+  display: none !important;
 }
