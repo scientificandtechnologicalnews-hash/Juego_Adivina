@@ -1,47 +1,86 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const tablero = document.getElementById("tablero");
-  const btnStart = document.getElementById("btnStart");
-  const selectTiempo = document.getElementById("tiempo");
-  const cortina = document.getElementById("cortina");
-  const formulario = document.getElementById("formulario");
+// ====================================================================
+// VARIABLES GLOBALES
+// ====================================================================
+let generatedSymbols = []; // Guardará los símbolos que aparecen en los dados
+let curtain = null; // Referencia a la cortina
+let formContainer = null; // Contenedor del formulario
 
-  const NUM_DADOS = 10;
-  const caras = ["🎵", "🎨", "🔤", "🔣", "🔢", "🐾"];
-  let resultadoReal = [];
+// ====================================================================
+// FUNCIÓN: Mostrar los dados (por ejemplo, cuando empieza el juego)
+// ====================================================================
+function showDice() {
+  // EJEMPLO DE SÍMBOLOS (cámbialos por los que tú uses)
+  const possibleSymbols = ["★", "✿", "❖", "◆", "●", "▲"];
 
-  // Función para generar los dados
-  function generarDados() {
-    tablero.innerHTML = "";
-    resultadoReal = [];
+  // Generamos tres símbolos aleatorios (uno por cada dado)
+  generatedSymbols = [
+    possibleSymbols[Math.floor(Math.random() * possibleSymbols.length)],
+    possibleSymbols[Math.floor(Math.random() * possibleSymbols.length)],
+    possibleSymbols[Math.floor(Math.random() * possibleSymbols.length)],
+  ];
 
-    for (let i = 0; i < NUM_DADOS; i++) {
-      const divDado = document.createElement("div");
-      divDado.classList.add("dado");
-      const cara = caras[Math.floor(Math.random() * caras.length)];
-      divDado.textContent = cara;
-      tablero.appendChild(divDado);
-      resultadoReal.push(cara);
-    }
+  // Pintamos los símbolos en pantalla
+  document.getElementById("dice1").textContent = generatedSymbols[0];
+  document.getElementById("dice2").textContent = generatedSymbols[1];
+  document.getElementById("dice3").textContent = generatedSymbols[2];
 
-    console.log("Resultado real:", resultadoReal);
+  console.log("Símbolos mostrados:", generatedSymbols);
+}
+
+// ====================================================================
+// FUNCIÓN: Bajar la cortina y mostrar el formulario cuando termina el tiempo
+// ====================================================================
+function lowerCurtain() {
+  curtain = document.getElementById("curtain");
+  formContainer = document.getElementById("form-container");
+
+  // Añadimos la clase para activar la animación CSS
+  curtain.classList.add("active");
+
+  // Esperamos el tiempo de la animación antes de mostrar el formulario
+  setTimeout(() => {
+    formContainer.style.display = "block";
+  }, 1200);
+}
+
+// ====================================================================
+// FUNCIÓN: Comprobar resultados cuando el usuario envía el formulario
+// ====================================================================
+function checkResult(event) {
+  event.preventDefault(); // Evita que la página recargue
+
+  // Recogemos los valores del formulario
+  const user1 = document.getElementById("answer1").value.trim();
+  const user2 = document.getElementById("answer2").value.trim();
+  const user3 = document.getElementById("answer3").value.trim();
+
+  let score = 0;
+
+  if (user1 === generatedSymbols[0]) score++;
+  if (user2 === generatedSymbols[1]) score++;
+  if (user3 === generatedSymbols[2]) score++;
+
+  alert(`Has acertado ${score} de 3`);
+
+  // (Opcional) Resetear para volver a jugar
+  formContainer.style.display = "none";
+  curtain.classList.remove("active");
+}
+
+// ====================================================================
+// EVENTO PRINCIPAL AL CARGAR LA PÁGINA
+// ====================================================================
+window.onload = function () {
+  showDice();
+
+  // Si tienes un botón para bajar la cortina, conéctalo así:
+  const btn = document.getElementById("startButton");
+  if (btn) {
+    btn.addEventListener("click", lowerCurtain);
   }
 
-  // Función que inicia la partida
-  function iniciarPartida() {
-    generarDados();
-
-    // Ocultar cortina y formulario al inicio
-    cortina.classList.add("oculto");
-    formulario.classList.add("oculto");
-
-    const tiempo = parseInt(selectTiempo.value) * 1000;
-
-    setTimeout(() => {
-      cortina.classList.remove("oculto"); // mostrar cortina
-      formulario.classList.remove("oculto"); // mostrar formulario
-      console.log("Tiempo terminado. Formulario visible.");
-    }, tiempo);
+  const form = document.getElementById("memory-form");
+  if (form) {
+    form.addEventListener("submit", checkResult);
   }
-
-  btnStart.addEventListener("click", iniciarPartida);
-});
+};
