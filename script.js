@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // =========================
-  // ELEMENTOS DEL DOM
-  // =========================
   const tablero = document.getElementById("tablero");
   const btnStart = document.getElementById("btnStart");
   const selectTiempo = document.getElementById("tiempo");
@@ -14,9 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const caras = ["🎵", "🎨", "🔤", "🔣", "🔢", "🐾"];
   let resultadoReal = [];
 
-  // =========================
-  // FUNCION GENERAR DADOS
-  // =========================
+  // GENERAR DADOS
   function generarDados() {
     tablero.innerHTML = "";
     resultadoReal = [];
@@ -24,11 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < NUM_DADOS; i++) {
       const dado = document.createElement("div");
       dado.classList.add("dado");
-
-      // Elegimos una cara aleatoria
       const cara = caras[Math.floor(Math.random() * caras.length)];
       dado.textContent = cara;
-
       tablero.appendChild(dado);
       resultadoReal.push(cara);
     }
@@ -36,18 +28,27 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Resultado real:", resultadoReal);
   }
 
-  // =========================
-  // FUNCION CORREGIR RESPUESTAS
-  // =========================
+  // INICIAR PARTIDA
+  function iniciarPartida() {
+    generarDados();
+
+    cortina.classList.add("oculto");
+    formulario.classList.add("oculto");
+    resultadoDiv.classList.add("oculto");
+
+    const tiempo = parseInt(selectTiempo.value) * 1000;
+
+    setTimeout(() => {
+      cortina.classList.remove("oculto");
+      formulario.classList.remove("oculto");
+    }, tiempo);
+  }
+
+  // CORREGIR RESPUESTAS
   function corregirRespuestas() {
-    // Contar cuántas veces apareció cada símbolo
     const conteo = { "🎵": 0, "🎨": 0, "🔤": 0, "🔣": 0, "🔢": 0, "🐾": 0 };
     resultadoReal.forEach((c) => conteo[c]++);
 
-    let puntos = 0;
-    let mensajes = "";
-
-    // Leer valores del formulario
     const respuestas = {
       "🎵": parseInt(document.getElementById("respuesta-notas").value) || 0,
       "🎨": parseInt(document.getElementById("respuesta-colores").value) || 0,
@@ -56,6 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
       "🔢": parseInt(document.getElementById("respuesta-primos").value) || 0,
       "🐾": parseInt(document.getElementById("respuesta-animales").value) || 0,
     };
+
+    let puntos = 0;
+    let mensajes = "";
 
     for (const cara in respuestas) {
       if (respuestas[cara] === conteo[cara]) {
@@ -66,53 +70,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Mostrar resultado
     resultadoDiv.classList.remove("oculto");
     resultadoDiv.innerHTML = `<strong>Puntos obtenidos: ${puntos} / 6</strong><br>${mensajes}`;
 
-    // Crear botón de reiniciar si no existe
-    let btnReiniciar = document.getElementById("btnReiniciar");
-    if (!btnReiniciar) {
-      btnReiniciar = document.createElement("button");
-      btnReiniciar.id = "btnReiniciar";
-      btnReiniciar.textContent = "Reiniciar Partida";
-      btnReiniciar.style.marginTop = "10px";
-      resultadoDiv.appendChild(btnReiniciar);
-    }
-
-    btnReiniciar.classList.remove("oculto");
-
-    // Reiniciar partida al hacer click
-    btnReiniciar.onclick = () => {
-      iniciarPartida();
-      btnReiniciar.classList.add("oculto"); // ocultar hasta la próxima partida
-    };
+    // Botón de reiniciar
+    let btnReiniciar = document.createElement("button");
+    btnReiniciar.textContent = "Reiniciar Partida";
+    btnReiniciar.onclick = () => iniciarPartida();
+    resultadoDiv.appendChild(btnReiniciar);
   }
 
-  // =========================
-  // FUNCION INICIAR PARTIDA
-  // =========================
-  function iniciarPartida() {
-    generarDados();
-
-    // Ocultar cortina, formulario y resultado
-    cortina.classList.add("oculto");
-    formulario.classList.add("oculto");
-    resultadoDiv.classList.add("oculto");
-
-    const tiempo = parseInt(selectTiempo.value) * 1000;
-
-    // Mostrar cortina y formulario después del tiempo
-    setTimeout(() => {
-      cortina.classList.remove("oculto");
-      formulario.classList.remove("oculto");
-      console.log("Fin del tiempo → mostrar formulario");
-    }, tiempo);
-  }
-
-  // =========================
-  // EVENTOS
-  // =========================
   btnStart.addEventListener("click", iniciarPartida);
   btnCorregir.addEventListener("click", corregirRespuestas);
 });

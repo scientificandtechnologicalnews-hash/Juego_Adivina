@@ -10,7 +10,6 @@
     <div class="game-container">
       <h1>Juego de Memoria - 10 Dados</h1>
 
-      <!-- Configuración: tiempo y botón de inicio -->
       <div class="configuracion">
         <label for="tiempo">Selecciona el tiempo:</label>
         <select id="tiempo">
@@ -22,18 +21,15 @@
         <button id="btnStart">Iniciar Juego</button>
       </div>
 
-      <!-- Tablero donde se mostrarán los 10 dados -->
       <div id="tablero" class="tablero"></div>
     </div>
 
-    <!-- Cortina negra -->
     <div id="cortina" class="cortina oculto">
       <h2>¡Tiempo terminado! Recuerda los dados.</h2>
     </div>
 
-    <!-- Formulario -->
     <div id="formulario" class="formulario oculto">
-      <h2>¿Qué recuerdas Campeón-a?</h2>
+      <h2>¿Qué recuerdas?</h2>
 
       <label>🎵 Notas musicales:</label>
       <input type="number" id="respuesta-notas" min="0" />
@@ -54,14 +50,9 @@
       <input type="number" id="respuesta-animales" min="0" />
 
       <button id="btnCorregir">Corregir</button>
+      <div id="resultado" class="oculto"></div>
     </div>
 
-    <!-- Resultado -->
-    <div id="resultado" class="oculto"></div>
-
     <script src="script.js"></script>
-    <footer>
-      <p>Desarrollado por Vicente - 2025</p>
-    </footer>
   </body>
 </html>
