@@ -107,3 +107,9 @@ body {
   font-weight: bold;
   margin-top: 10px;
 }
+#btnReiniciar {
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
