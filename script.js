@@ -11,11 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const caras = ["🎵", "🎨", "🔤", "🔣", "🔢", "🐾"];
   let resultadoReal = [];
 
-  // GENERAR DADOS
   function generarDados() {
     tablero.innerHTML = "";
     resultadoReal = [];
-
     for (let i = 0; i < NUM_DADOS; i++) {
       const dado = document.createElement("div");
       dado.classList.add("dado");
@@ -24,27 +22,22 @@ document.addEventListener("DOMContentLoaded", () => {
       tablero.appendChild(dado);
       resultadoReal.push(cara);
     }
-
     console.log("Resultado real:", resultadoReal);
   }
 
-  // INICIAR PARTIDA
   function iniciarPartida() {
     generarDados();
-
     cortina.classList.add("oculto");
     formulario.classList.add("oculto");
     resultadoDiv.classList.add("oculto");
 
     const tiempo = parseInt(selectTiempo.value) * 1000;
-
     setTimeout(() => {
       cortina.classList.remove("oculto");
       formulario.classList.remove("oculto");
     }, tiempo);
   }
 
-  // CORREGIR RESPUESTAS
   function corregirRespuestas() {
     const conteo = { "🎵": 0, "🎨": 0, "🔤": 0, "🔣": 0, "🔢": 0, "🐾": 0 };
     resultadoReal.forEach((c) => conteo[c]++);
@@ -71,12 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     resultadoDiv.classList.remove("oculto");
-    resultadoDiv.innerHTML = `<strong>Puntos obtenidos: ${puntos} / 6</strong><br>${mensajes}`;
+    resultadoDiv.innerHTML = `<strong>Puntos obtenidos: ${puntos}/6</strong><br>${mensajes}`;
 
-    // Botón de reiniciar
-    let btnReiniciar = document.createElement("button");
+    const btnReiniciar = document.createElement("button");
     btnReiniciar.textContent = "Reiniciar Partida";
-    btnReiniciar.onclick = () => iniciarPartida();
+    btnReiniciar.onclick = iniciarPartida;
     resultadoDiv.appendChild(btnReiniciar);
   }
 

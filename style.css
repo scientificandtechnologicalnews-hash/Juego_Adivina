@@ -1,6 +1,3 @@
-/* ────────────────────────────────────
-   ESTILO GENERAL
-──────────────────────────────────── */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -13,26 +10,20 @@ body {
   width: 90%;
   max-width: 600px;
   margin: 20px auto;
-  position: relative; /* necesario para posicionar cortina y formulario sobre el tablero */
+  position: relative;
 }
 
-/* ────────────────────────────────────
-   CONFIGURACIÓN DEL JUEGO
-──────────────────────────────────── */
 .configuracion {
   margin-bottom: 20px;
 }
 
-.configuracion button {
+#btnStart {
   padding: 10px 20px;
   margin-left: 10px;
   cursor: pointer;
   font-size: 16px;
 }
 
-/* ────────────────────────────────────
-   TABLERO DE DADOS
-──────────────────────────────────── */
 .tablero {
   display: grid;
   grid-template-columns: repeat(5, 60px);
@@ -54,11 +45,8 @@ body {
   transition: opacity 0.5s ease;
 }
 
-/* ────────────────────────────────────
-   CORTINA NEGRA
-──────────────────────────────────── */
 .cortina {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -70,16 +58,13 @@ body {
   color: white;
   font-size: 28px;
   font-weight: bold;
-  z-index: 10; /* encima de los dados */
+  z-index: 10;
 }
 
 .cortina.oculto {
-  display: none !important; /* oculto hasta que JS lo active */
+  display: none !important;
 }
 
-/* ────────────────────────────────────
-   FORMULARIO
-──────────────────────────────────── */
 .formulario {
   background: white;
   width: 300px;
@@ -90,7 +75,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20; /* encima de la cortina */
+  z-index: 20;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -110,21 +95,20 @@ body {
   font-size: 16px;
 }
 
-/* ────────────────────────────────────
-   RESULTADO
-──────────────────────────────────── */
-#resultado {
-  margin-top: 15px;
+.resultado {
+  width: 320px;
+  background: #f0f0f0;
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 10px;
   text-align: left;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-#resultado button {
+.resultado button {
   margin-top: 10px;
 }
 
-/* ────────────────────────────────────
-   CLASES OCULTAS
-──────────────────────────────────── */
 .oculto {
   display: none !important;
 }
