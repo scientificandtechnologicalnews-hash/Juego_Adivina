@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Elementos del DOM
+  // =========================
+  // ELEMENTOS DEL DOM
+  // =========================
   const tablero = document.getElementById("tablero");
   const btnStart = document.getElementById("btnStart");
   const selectTiempo = document.getElementById("tiempo");
@@ -7,15 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const formulario = document.getElementById("formulario");
   const btnCorregir = document.getElementById("btnCorregir");
   const resultadoDiv = document.getElementById("resultado");
-  const btnReiniciar = document.getElementById("btnReiniciar");
 
   const NUM_DADOS = 10;
   const caras = ["🎵", "🎨", "🔤", "🔣", "🔢", "🐾"];
   let resultadoReal = [];
 
-  // ====================================
-  // GENERAR DADOS
-  // ====================================
+  // =========================
+  // FUNCION GENERAR DADOS
+  // =========================
   function generarDados() {
     tablero.innerHTML = "";
     resultadoReal = [];
@@ -34,9 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Resultado real:", resultadoReal);
   }
 
-  // ====================================
-  // CORREGIR RESPUESTAS
-  // ====================================
+  // =========================
+  // FUNCION CORREGIR RESPUESTAS
+  // =========================
   function corregirRespuestas() {
     // Contar cuántas veces apareció cada símbolo
     const conteo = { "🎵": 0, "🎨": 0, "🔤": 0, "🔣": 0, "🔢": 0, "🐾": 0 };
@@ -45,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let puntos = 0;
     let mensajes = "";
 
-    // Leer valores del formulario
     const respuestas = {
       "🎵": parseInt(document.getElementById("respuesta-notas").value) || 0,
       "🎨": parseInt(document.getElementById("respuesta-colores").value) || 0,
@@ -64,24 +64,32 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-// Mostrar resultado
-resultadoDiv.classList.remove("oculto");
-resultadoDiv.innerHTML = `<strong>Puntos obtenidos: ${puntos} / 6</strong><br>${mensajes}`;
+    // Mostrar resultado
+    resultadoDiv.classList.remove("oculto");
+    resultadoDiv.innerHTML = `<strong>Puntos obtenidos: ${puntos} / 6</strong><br>${mensajes}`;
 
-// Mostrar botón de reiniciar
-const btnReiniciar = document.getElementById("btnReiniciar");
-btnReiniciar.classList.remove("oculto");
+    // Crear botón de reiniciar dentro del resultado si no existe
+    let btnReiniciar = document.getElementById("btnReiniciar");
+    if (!btnReiniciar) {
+      btnReiniciar = document.createElement("button");
+      btnReiniciar.id = "btnReiniciar";
+      btnReiniciar.textContent = "Reiniciar Partida";
+      btnReiniciar.style.marginTop = "10px";
+      resultadoDiv.appendChild(btnReiniciar);
+    }
 
-// Listener del botón
-btnReiniciar.onclick = () => {
-  iniciarPartida();           // reinicia el juego
-  btnReiniciar.classList.add("oculto"); // oculta el botón otra vez
-};
+    btnReiniciar.classList.remove("oculto");
 
+    // Listener del botón reiniciar
+    btnReiniciar.onclick = () => {
+      iniciarPartida();
+      btnReiniciar.classList.add("oculto");
+    };
+  }
 
-  // ====================================
-  // INICIAR PARTIDA
-  // ====================================
+  // =========================
+  // FUNCION INICIAR PARTIDA
+  // =========================
   function iniciarPartida() {
     generarDados();
 
@@ -100,16 +108,9 @@ btnReiniciar.onclick = () => {
     }, tiempo);
   }
 
-  // ====================================
+  // =========================
   // EVENTOS
-  // ====================================
+  // =========================
   btnStart.addEventListener("click", iniciarPartida);
   btnCorregir.addEventListener("click", corregirRespuestas);
-};
-
-//Reiniciar partida
-function reiniciarPartida() {
-  console.log("Reiniciando partida...");
-  iniciarPartida(); // reutiliza la función existente
-}
-btnReiniciar.addEventListener("click", reiniciarPartida);
+});
