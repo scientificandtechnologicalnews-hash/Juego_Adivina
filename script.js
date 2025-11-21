@@ -63,8 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Mostrar resultado en pantalla
-    resultadoDiv.style.display = "block";
+    // Mostrar resultado
+    resultadoDiv.classList.remove("oculto");
     resultadoDiv.innerHTML = `<strong>Puntos obtenidos: ${puntos} / 6</strong><br>${mensajes}`;
   }
 
@@ -74,13 +74,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function iniciarPartida() {
     generarDados();
 
-    // Ocultar cortina, formulario y resultado
+    // Ocultar cortina, formulario y resultado al iniciar
     cortina.classList.add("oculto");
     formulario.classList.add("oculto");
-    resultadoDiv.style.display = "none";
+    resultadoDiv.classList.add("oculto");
 
     const tiempo = parseInt(selectTiempo.value) * 1000;
 
+    // Mostrar cortina y formulario cuando se acabe el tiempo
     setTimeout(() => {
       cortina.classList.remove("oculto");
       formulario.classList.remove("oculto");
